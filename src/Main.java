@@ -8,5 +8,7 @@ public class Main {
 
         myLinkedList.reverse();
         myLinkedList.printList();
+
+
     }
 }
