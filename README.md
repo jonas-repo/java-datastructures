@@ -13,6 +13,11 @@ The linked list supports:
 - Reversing the list
 - Finding the middle node
 - Detecting loops (cycles)
+- Finding the k-th node from the end
+- Removing duplicate values
+- Converting binary numbers to decimal
+
+
 
 ---
 
@@ -43,7 +48,7 @@ class Node {
 
 Each node contains:
 
-- `value`: the stored value
+- `value`: stored integer value
 - `next`: reference to the next node
 
 ---
@@ -54,48 +59,8 @@ Each node contains:
 
 Creates a new linked list with an initial node.
 
-### Example
-
 ```java
 LinkedList list = new LinkedList(10);
-```
-
-### Result
-
-```text
-head -> 10 <- tail
-length = 1
-```
-
----
-
-# Methods
-
----
-
-# printList()
-
-Prints all nodes in the linked list along with:
-
-- head
-- tail
-- length
-
-### Example
-
-```java
-list.printList();
-```
-
-### Output
-
-```text
-node: 10
-node: 20
-node: 30
-tail: 30
-head: 10
-length: 3
 ```
 
 ---
@@ -104,18 +69,11 @@ length: 3
 
 Adds a node to the end of the list.
 
-### Time Complexity
+### Complexity
 
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(1) |
-| Space | O(1) |
-
-### Example
-
-```java
-list.append(20);
-```
+| O(1) | O(1) |
 
 ---
 
@@ -123,22 +81,11 @@ list.append(20);
 
 Removes the last node from the list.
 
-### Returns
+### Complexity
 
-The removed node.
-
-### Time Complexity
-
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
-
-### Example
-
-```java
-Node removed = list.removeLast();
-```
+| O(n) | O(1) |
 
 ---
 
@@ -146,18 +93,11 @@ Node removed = list.removeLast();
 
 Adds a node to the beginning of the list.
 
-### Time Complexity
+### Complexity
 
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(1) |
-| Space | O(1) |
-
-### Example
-
-```java
-list.prepend(5);
-```
+| O(1) | O(1) |
 
 ---
 
@@ -165,57 +105,54 @@ list.prepend(5);
 
 Removes the first node from the list.
 
-### Returns
+### Complexity
 
-The removed node.
-
-### Time Complexity
-
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(1) |
-| Space | O(1) |
+| O(1) | O(1) |
 
 ---
 
 # get(int index)
 
-Returns the node at a specific index.
-
-### Parameters
-
-| Parameter | Description |
-|---|---|
-| `index` | Position of the node |
+Returns the node at the specified index.
 
 ### Returns
 
-- The node if found
-- `null` if the index is invalid
+- Node if found
+- `null` if index is invalid
 
-### Time Complexity
+### Complexity
 
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
+| O(n) | O(1) |
+
+### Why Space Complexity is O(1)
+
+The method only uses:
+
+- one temporary pointer (`temp`)
+- one loop counter (`i`)
+
+No additional data structures are created.
 
 ---
 
 # set(int index, int value)
 
-Updates the value of an existing node.
+Updates the value of a node.
 
 ### Returns
 
-- `true` if the value was updated successfully
-- `false` if the index is invalid
+- `true` if updated successfully
+- `false` if index is invalid
 
-### Example
+### Complexity
 
-```java
-list.set(1, 50);
-```
+| Time | Space |
+|---|---|
+| O(n) | O(1) |
 
 ---
 
@@ -225,20 +162,14 @@ Inserts a node at a specific position.
 
 ### Special Cases
 
-- Insert at beginning → `prepend()`
-- Insert at end → `append()`
+- Beginning → `prepend()`
+- End → `append()`
 
-### Returns
+### Complexity
 
-- `true` if insertion was successful
-- `false` if the index is invalid
-
-### Time Complexity
-
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
+| O(n) | O(1) |
 
 ---
 
@@ -251,41 +182,37 @@ Removes a node at a specific position.
 - First node → `removeFirst()`
 - Last node → `removeLast()`
 
-### Returns
+### Complexity
 
-The removed node.
-
-### Time Complexity
-
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
+| O(n) | O(1) |
 
 ---
 
 # reverse()
 
-Reverses the entire linked list.
+Reverses the linked list in-place.
 
-### Before
+### Example
+
+Before:
 
 ```text
 10 -> 20 -> 30
 ```
 
-### After
+After:
 
 ```text
 30 -> 20 -> 10
 ```
 
-### Time Complexity
+### Complexity
 
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
+| O(n) | O(1) |
 
 ---
 
@@ -295,37 +222,17 @@ Finds the middle node using the:
 
 ## Fast and Slow Pointer Technique
 
-- `slow` moves one node at a time
-- `fast` moves two nodes at a time
+### Complexity
 
-When `fast` reaches the end:
-
-- `slow` will be at the middle
-
-### Time Complexity
-
-| Case | Complexity |
+| Time | Space |
 |---|---|
-| Time | O(n) |
-| Space | O(1) |
-
-### Example
-
-```text
-1 -> 2 -> 3 -> 4 -> 5
-```
-
-Result:
-
-```text
-3
-```
+| O(n) | O(1) |
 
 ---
 
 # hasLoop()
 
-Detects whether the linked list contains a loop (cycle).
+Detects whether the linked list contains a cycle.
 
 Uses:
 
@@ -335,77 +242,138 @@ Also known as:
 
 - Tortoise and Hare Algorithm
 
+### Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(1) |
+
+---
+
+# findKthFromEnd(int k)
+
+Returns the k-th node from the end of the linked list.
+
+Uses the:
+
+## Two Pointer Technique
+
 ### How It Works
 
-- `slow` moves one node at a time
-- `fast` moves two nodes at a time
+- `fast` moves `k` positions ahead
+- `slow` starts at the head
+- Both move together until `fast` reaches the end
 
-If they meet:
+At that point:
+
+- `slow` points to the k-th node from the end
+
+### Example
 
 ```text
-A loop exists
+1 -> 2 -> 3 -> 4 -> 5
 ```
-
-### Returns
-
-- `true` → loop detected
-- `false` → no loop
-
-### Time Complexity
-
-| Case | Complexity |
-|---|---|
-| Time | O(n) |
-| Space | O(1) |
-
----
-
-# Complete Example
 
 ```java
-public class Main {
-    public static void main(String[] args) {
-
-        LinkedList list = new LinkedList(10);
-
-        list.append(20);
-        list.append(30);
-
-        list.prepend(5);
-
-        list.insert(2, 15);
-
-        list.printList();
-
-        list.reverse();
-
-        System.out.println("Reversed:");
-        list.printList();
-    }
-}
+list.findKthFromEnd(2);
 ```
+
+Result:
+
+```text
+4
+```
+
+### Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(1) |
 
 ---
 
-# Expected Output
+# removeDuplicates()
+
+Removes duplicate values from the linked list.
+
+Uses:
+
+## HashSet
+
+to track values already encountered.
+
+### Example
+
+Before:
 
 ```text
-node: 5
-node: 10
-node: 15
-node: 20
-node: 30
-
-tail: 30
-head: 5
-length: 5
+1 -> 2 -> 2 -> 3 -> 1
 ```
+
+After:
+
+```text
+1 -> 2 -> 3
+```
+
+### Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(n) |
+
+### Why Space Complexity is O(n)
+
+Because the `HashSet` can store up to `n` unique values.
+
+---
+
+# binaryToDecimal()
+
+Converts a binary number stored in the linked list into a decimal integer.
+
+Each node should contain:
+
+- `0`
+- `1`
+
+### Example
+
+Linked List:
+
+```text
+1 -> 0 -> 1 -> 1
+```
+
+Binary value:
+
+```text
+1011₂
+```
+
+Decimal result:
+
+```text
+11
+```
+
+### Core Formula
+
+```java
+num = num * 2 + current.value;
+```
+
+### Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(1) |
 
 ---
 
 # Overall Time Complexities
 
-| Operation | Complexity |
+| Operation | Time Complexity |
 |---|---|
 | append | O(1) |
 | prepend | O(1) |
@@ -418,19 +386,24 @@ length: 5
 | reverse | O(n) |
 | findMiddleNode | O(n) |
 | hasLoop | O(n) |
+| findKthFromEnd | O(n) |
+| removeDuplicates | O(n) |
+| binaryToDecimal | O(n) |
 
 ---
 
-# Core Concepts Used
+# Concepts Used
 
-This implementation demonstrates important data structure concepts:
+This implementation demonstrates:
 
 - Singly Linked Lists
-- References and Pointers
+- Pointer Manipulation
 - Dynamic Memory
 - Fast & Slow Pointers
 - Floyd Cycle Detection
+- HashSet Usage
 - In-place Reversal
+- Binary Conversion Logic
 - Encapsulation
 - Inner Classes
 
@@ -438,22 +411,12 @@ This implementation demonstrates important data structure concepts:
 
 # Possible Improvements
 
-Potential future improvements:
+Potential future additions:
 
-- `contains()` method
-- `clear()` method
-- `size()` method
-- Doubly Linked List version
+- `contains()`
+- `clear()`
+- `size()`
 - Generic implementation using `<T>`
 - Iterator support
-- Java Collection integration
-
----
-
-# Author Jonas Maldonado
-
-Educational implementation of a linked list in Java focused on understanding:
-
-- node manipulation
-- references
-- classic linked list algorithms
+- Doubly Linked List version
+- Java Collections integration
